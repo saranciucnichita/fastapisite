@@ -1,0 +1,10 @@
+[
+    {
+        "name": "Тестовый пользователь",
+        "login": "test",
+        "password_md5": "098f6bcd4621d373cade4e832627b4f6",
+        "message": "Привет! Я только что зарегистрировался.",
+        "photo": "default.png",
+        "//password": "test"
+    }
+]

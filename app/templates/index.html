@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EveryHere</title>
+    <style>
+        body {
+	font-family: Arial, sans-serif;
+	margin: 0; padding: 20px;
+	background-color: #f4f7f6;
+	}
+
+        .header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 30px;
+	}
+
+        .header a {
+	text-decoration: none;
+	padding: 10px 15px;
+	background-color: #007bff;
+	color: white;
+	border-radius: 5px;
+	}
+
+        .profile-card {
+	border: 1px solid #ddd;
+	padding: 15px;
+	margin-bottom: 20px;
+	background-color: white;
+	border-radius: 8px;
+	display: flex;
+	align-items: center;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+	}
+
+        .profile-card img {
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	border-radius: 50%;
+	margin-right: 20px;
+	border: 3px solid #007bff;
+	}
+
+        .profile-info h3 {
+	margin: 0 0 5px 0;
+	color: #333;
+	}
+
+        .profile-info p {
+	margin: 0;
+	color: #666;
+	font-style: italic;
+	}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>EveryHere</h1>
+        <a href="{% if current_user_login %}/profile{% else %}/auth{% endif %}">
+            {% if current_user_login %}
+                Мой профиль ({{ current_user_login }})
+            {% else %}
+                Вход/Регистрация
+            {% endif %}
+        </a>
+    </div>
+
+    <h2>Пользователи</h2>
+
+    {% for user in users %}
+        <div class="profile-card">
+            <img src="{{ url_for('images', path=user.photo) }}" alt="{{ user.name }}">
+            <div class="profile-info">
+                <h3>{{ user.name }} ({{ user.login }})</h3>
+                <p>"{{ user.message }}"</p>
+            </div>
+        </div>
+    {% else %}
+        <p>Пока нет зарегистрированных пользователей.</p>
+    {% endfor %}
+</body>
+</html>
